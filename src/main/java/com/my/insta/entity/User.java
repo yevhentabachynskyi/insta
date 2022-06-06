@@ -1,7 +1,7 @@
-package com.my.entity;
+package com.my.insta.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.my.entity.enums.ERole;
+import com.my.insta.entity.enums.ERole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,9 +17,9 @@ public class User {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(name = "username", unique = true, updatable = true)
+    @Column(unique = true, updatable = true)
     private String userName;
-    @Column(name = "lastname", nullable = false)
+    @Column(nullable = false)
     private String lastName;
     @Column(unique = true)
     private String email;
@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @ElementCollection(targetClass = ERole.class)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn("user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<ERole> role = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)

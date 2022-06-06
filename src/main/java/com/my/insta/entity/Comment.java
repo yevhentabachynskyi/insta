@@ -1,4 +1,4 @@
-package com.my.entity;
+package com.my.insta.entity;
 
 import lombok.Data;
 

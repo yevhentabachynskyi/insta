@@ -1,4 +1,4 @@
-package com.my.entity.enums;
+package com.my.insta.entity.enums;
 
 public enum ERole {
     ROLE_USER,
