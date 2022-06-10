@@ -30,8 +30,9 @@ public class User implements UserDetails {
     private String password;
 
     @ElementCollection(targetClass = ERole.class)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    private Set<ERole> role = new HashSet<>();
+    @CollectionTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"))
+    private Set<ERole> roles = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
@@ -44,6 +45,86 @@ public class User implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<ERole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<ERole> roles) {
+        this.roles = roles;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public User(Long id, String userName, String email, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -75,7 +156,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return userName ;
     }
 
     @Override
@@ -97,5 +178,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
 
